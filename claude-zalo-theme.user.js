@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Claude Blue Chat Theme (HP)
 // @namespace    https://github.com/HienPhuong99/Theme-Claude
-// @version      0.2.1
+// @version      0.3.0
 // @description  Giao diện claude.ai tông xanh kiểu ứng dụng nhắn tin, logo HP.
 // @author       HienPhuong99
 // @license      MIT
@@ -116,32 +116,32 @@
     `font-size="${size}" font-weight="600" fill="${fg}" text-anchor="middle">${label}</text></svg>`);
   const BOT = disc('#4f9bff', '#0068ff', '#fff', 'AI', 26);
   const ROW = disc('#e5f1ff', '#cfe2ff', '#0068ff', '💬', 28);
-  // Biểu tượng trang trí trên cột xanh (chỉ là hình nền, không bấm được). Nét viền trắng 1.6px trên lưới 24px.
+  // Biểu tượng trang trí trên cột xanh (chỉ là hình nền, không bấm được). Nét viền trắng 1.75px.
   const icon = (body, active) => 'data:image/svg+xml,' + encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">` +
     (active ? `<rect width="48" height="48" rx="6" fill="rgba(0,0,0,.25)"/>` : '') +
-    `<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${body}</g></svg>`);
+    `<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${body}</g></svg>`);
+  // Icon từ Tabler Icons v3.50.0 (MIT, https://tabler.io/icons), lưới 24px.
   const ICONS = {
-    // bong bóng chat tô trắng, hai vạch xanh (đang chọn)
-    chat: '<path fill="#fff" d="M12 3.5c5 0 9 3.4 9 7.6s-4 7.6-9 7.6c-1 0-2-.1-2.9-.4L4.8 20.2l1-3.7C4.1 15.1 3 13.2 3 11.1 3 6.9 7 3.5 12 3.5z"/>' +
-          '<path stroke="#0068ff" d="M8.2 9.6h7.6M8.2 12.8h4.8"/>',
-    // danh bạ: sổ có gáy, hình người
-    contact: '<rect x="5.5" y="3" width="14" height="18" rx="1.8"/><path d="M3.5 7.5h3M3.5 12h3M3.5 16.5h3"/>' +
-             '<circle cx="12.5" cy="10" r="2.3"/><path d="M8.8 16.6c.6-1.9 2-2.9 3.7-2.9s3.1 1 3.7 2.9"/>',
-    // đám mây có mũi tên đồng bộ
-    cloud: '<path d="M7.2 18.5a4.6 4.6 0 0 1-.7-9.1 6 6 0 0 1 11.3-.4 4.8 4.8 0 0 1-.4 9.5z"/>' +
-           '<path d="M10 14.6a2.3 2.3 0 0 0 4.2-.4M14 12a2.3 2.3 0 0 0-4.2.4M14.3 15.7v-1.5h-1.5M9.7 10.9v1.5h1.5"/>',
-    // thư mục có đám mây nhỏ
-    folder: '<path d="M3 7.2A2.2 2.2 0 0 1 5.2 5h3.6l2 2h8a2.2 2.2 0 0 1 2.2 2.2v8.6a2.2 2.2 0 0 1-2.2 2.2H5.2A2.2 2.2 0 0 1 3 17.8z"/>' +
-            '<path d="M11.6 17.2a1.9 1.9 0 0 1-.1-3.8 2.7 2.7 0 0 1 5.1.4 1.7 1.7 0 0 1-.2 3.4z"/>',
-    // chụp màn hình: khung nét đứt, dấu cộng ở góc
-    capture: '<rect x="3.5" y="3.5" width="13.5" height="13.5" rx="1.5" stroke-dasharray="3 2.4"/><path d="M19.5 15.5v5M17 18h5"/>',
-    // hộp công cụ
-    work: '<rect x="3" y="7.5" width="18" height="12.5" rx="1.8"/><path d="M8.8 7.5V5.6c0-.9.7-1.6 1.6-1.6h3.2c.9 0 1.6.7 1.6 1.6v1.9M3 12.8h18"/>' +
-          '<rect x="10.6" y="11.6" width="2.8" height="2.6" rx=".6"/>',
-    // bánh răng
-    gear: '<path d="M10.3 3h3.4l.5 2.4c.6.2 1.2.6 1.7 1l2.3-.8 1.7 3-1.8 1.6a6.5 6.5 0 0 1 0 2l1.8 1.6-1.7 3-2.3-.8c-.5.4-1.1.8-1.7 1l-.5 2.4h-3.4l-.5-2.4c-.6-.2-1.2-.6-1.7-1l-2.3.8-1.7-3 1.8-1.6a6.5 6.5 0 0 1 0-2L4.1 8.6l1.7-3 2.3.8c.5-.4 1.1-.8 1.7-1z"/>' +
-          '<circle cx="12" cy="12" r="2.7"/>',
+    // filled/message-circle + hai vạch xanh (trạng thái đang chọn)
+    chat: '<path fill="#fff" stroke="none" d="M5.821 4.91c3.899 -2.765 9.468 -2.539 13.073 .535c3.667 3.129 4.168 8.238 1.152 11.898c-2.841 3.447 -7.965 4.583 -12.231 2.805l-.233 -.101l-4.374 .931c-.6 .1 -1 -.4 -.8 -.9l1.15 -3.45l-.022 -.037c-2.21 -3.747 -1.209 -8.391 2.413 -11.119z"/>' +
+          '<path stroke="#0068ff" d="M8.5 10.5h7M8.5 13.5h4.5"/>',
+    // outline/address-book
+    contact: '<path d="M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2"/><path d="M10 16h6"/>' +
+             '<path d="M11 11a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M4 8h3"/><path d="M4 12h3"/><path d="M4 16h3"/>',
+    // outline/cloud
+    cloud: '<path d="M6.657 18c-2.572 0 -4.657 -2.007 -4.657 -4.483c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 1c1.488 1.19 2.162 3.007 1.77 4.769h.99c1.913 0 3.464 1.56 3.464 3.486c0 1.927 -1.551 3.487 -3.465 3.487h-11.878"/>',
+    // outline/folder
+    folder: '<path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"/>',
+    // outline/screenshot
+    capture: '<path d="M7 19a2 2 0 0 1 -2 -2"/><path d="M5 13v-2"/><path d="M5 7a2 2 0 0 1 2 -2"/><path d="M11 5h2"/>' +
+             '<path d="M17 5a2 2 0 0 1 2 2"/><path d="M19 11v2"/><path d="M19 17v4"/><path d="M21 19h-4"/><path d="M13 19h-2"/>',
+    // outline/briefcase
+    work: '<path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9"/>' +
+          '<path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"/><path d="M12 12l0 .01"/><path d="M3 13a20 20 0 0 0 18 0"/>',
+    // outline/settings
+    gear: '<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065"/>' +
+          '<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/>',
   };
   // Bố cục: avatar + 2 mục ở trên, 5 mục xếp sát nhau dưới đáy
   const RAIL = [

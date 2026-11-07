@@ -41,3 +41,7 @@ Sửa hai bảng `LIGHT` và `DARK` ở đầu file script. Mỗi dòng có chú
 - App Desktop: bấm Ctrl + Alt + H, hoặc tắt rồi mở lại app.
 
 Khi claude.ai đổi giao diện, có thể vài chỗ không còn ăn màu. Lúc đó cần cập nhật lại tên biến màu trong script.
+
+## Nguồn icon
+
+Các icon trên cột xanh lấy từ [Tabler Icons](https://tabler.io/icons) v3.50.0, giấy phép MIT. Xem [LICENSE-tabler-icons.txt](LICENSE-tabler-icons.txt).
