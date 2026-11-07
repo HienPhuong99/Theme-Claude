@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Claude Blue Chat Theme (HP)
 // @namespace    https://github.com/HienPhuong99/Theme-Claude
-// @version      0.2.0
+// @version      0.2.1
 // @description  Giao diện claude.ai tông xanh kiểu ứng dụng nhắn tin, logo HP.
 // @author       HienPhuong99
 // @license      MIT
@@ -116,25 +116,40 @@
     `font-size="${size}" font-weight="600" fill="${fg}" text-anchor="middle">${label}</text></svg>`);
   const BOT = disc('#4f9bff', '#0068ff', '#fff', 'AI', 26);
   const ROW = disc('#e5f1ff', '#cfe2ff', '#0068ff', '💬', 28);
-  // Biểu tượng trang trí trên cột xanh (chỉ là hình nền, không bấm được)
-  const icon = (d, active) => 'data:image/svg+xml,' + encodeURIComponent(
+  // Biểu tượng trang trí trên cột xanh (chỉ là hình nền, không bấm được). Nét viền trắng 1.6px trên lưới 24px.
+  const icon = (body, active) => 'data:image/svg+xml,' + encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">` +
     (active ? `<rect width="48" height="48" rx="6" fill="rgba(0,0,0,.25)"/>` : '') +
-    `<path transform="translate(12 12)" fill="#fff" d="${d}"/></svg>`);
+    `<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${body}</g></svg>`);
   const ICONS = {
-    chat: 'M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2zm2 5v2h12V8zm0 4v2h8v-2z',
-    contact: 'M5 2h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm7 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm-5 11h10c0-2.5-2.2-4-5-4s-5 1.5-5 4z',
-    cloud: 'M7 19a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 10a4.5 4.5 0 0 1-.5 9z',
-    work: 'M9 3h6a1 1 0 0 1 1 1v2h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4V4a1 1 0 0 1 1-1zm1 3h4V5h-4z',
-    gear: 'M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7 7 0 0 0-1.7-1L15 3h-4l-.4 2.9a7 7 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7 7 0 0 0 1.7 1L11 21h4l.4-2.9a7 7 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z',
+    // bong bóng chat tô trắng, hai vạch xanh (đang chọn)
+    chat: '<path fill="#fff" d="M12 3.5c5 0 9 3.4 9 7.6s-4 7.6-9 7.6c-1 0-2-.1-2.9-.4L4.8 20.2l1-3.7C4.1 15.1 3 13.2 3 11.1 3 6.9 7 3.5 12 3.5z"/>' +
+          '<path stroke="#0068ff" d="M8.2 9.6h7.6M8.2 12.8h4.8"/>',
+    // danh bạ: sổ có gáy, hình người
+    contact: '<rect x="5.5" y="3" width="14" height="18" rx="1.8"/><path d="M3.5 7.5h3M3.5 12h3M3.5 16.5h3"/>' +
+             '<circle cx="12.5" cy="10" r="2.3"/><path d="M8.8 16.6c.6-1.9 2-2.9 3.7-2.9s3.1 1 3.7 2.9"/>',
+    // đám mây có mũi tên đồng bộ
+    cloud: '<path d="M7.2 18.5a4.6 4.6 0 0 1-.7-9.1 6 6 0 0 1 11.3-.4 4.8 4.8 0 0 1-.4 9.5z"/>' +
+           '<path d="M10 14.6a2.3 2.3 0 0 0 4.2-.4M14 12a2.3 2.3 0 0 0-4.2.4M14.3 15.7v-1.5h-1.5M9.7 10.9v1.5h1.5"/>',
+    // thư mục có đám mây nhỏ
+    folder: '<path d="M3 7.2A2.2 2.2 0 0 1 5.2 5h3.6l2 2h8a2.2 2.2 0 0 1 2.2 2.2v8.6a2.2 2.2 0 0 1-2.2 2.2H5.2A2.2 2.2 0 0 1 3 17.8z"/>' +
+            '<path d="M11.6 17.2a1.9 1.9 0 0 1-.1-3.8 2.7 2.7 0 0 1 5.1.4 1.7 1.7 0 0 1-.2 3.4z"/>',
+    // chụp màn hình: khung nét đứt, dấu cộng ở góc
+    capture: '<rect x="3.5" y="3.5" width="13.5" height="13.5" rx="1.5" stroke-dasharray="3 2.4"/><path d="M19.5 15.5v5M17 18h5"/>',
+    // hộp công cụ
+    work: '<rect x="3" y="7.5" width="18" height="12.5" rx="1.8"/><path d="M8.8 7.5V5.6c0-.9.7-1.6 1.6-1.6h3.2c.9 0 1.6.7 1.6 1.6v1.9M3 12.8h18"/>' +
+          '<rect x="10.6" y="11.6" width="2.8" height="2.6" rx=".6"/>',
+    // bánh răng
+    gear: '<path d="M10.3 3h3.4l.5 2.4c.6.2 1.2.6 1.7 1l2.3-.8 1.7 3-1.8 1.6a6.5 6.5 0 0 1 0 2l1.8 1.6-1.7 3-2.3-.8c-.5.4-1.1.8-1.7 1l-.5 2.4h-3.4l-.5-2.4c-.6-.2-1.2-.6-1.7-1l-2.3.8-1.7-3 1.8-1.6a6.5 6.5 0 0 1 0-2L4.1 8.6l1.7-3 2.3.8c.5-.4 1.1-.8 1.7-1z"/>' +
+          '<circle cx="12" cy="12" r="2.7"/>',
   };
+  // Bố cục: avatar + 2 mục ở trên, 5 mục xếp sát nhau dưới đáy
   const RAIL = [
-    `url("${AVATAR}") 8px 52px / 48px 48px`,
-    `url("${icon(ICONS.chat, true)}") 8px 116px / 48px 48px`,
-    `url("${icon(ICONS.contact)}") 8px 172px / 48px 48px`,
-    `url("${icon(ICONS.cloud)}") 8px calc(100% - 132px) / 48px 48px`,
-    `url("${icon(ICONS.work)}") 8px calc(100% - 76px) / 48px 48px`,
-    `url("${icon(ICONS.gear)}") 8px calc(100% - 20px) / 48px 48px`,
+    `url("${AVATAR}") 8px 14px / 48px 48px`,
+    `url("${icon(ICONS.chat, true)}") 8px 80px / 48px 48px`,
+    `url("${icon(ICONS.contact)}") 8px 132px / 48px 48px`,
+    ...['cloud', 'folder', 'capture', 'work', 'gear'].map((k, i) =>
+      `url("${icon(ICONS[k])}") 8px calc(100% - ${12 + (4 - i) * 52}px) / 48px 48px`),
   ].map(l => l + ' no-repeat').join(',\n');
 
   // claude.ai khai báo lại bảng màu ở nhiều lớp .cds-root lồng nhau, nên phải đặt trên mọi phần tử.
